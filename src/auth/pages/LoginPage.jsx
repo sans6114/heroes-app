@@ -1,9 +1,14 @@
+import { useContext } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 import { Btn } from '../../ui/components/Btn';
+import { UserContext } from '../context/USerContext';
 
 export const LoginPage = () => {
 
+  const {state} = useContext(UserContext)
+console.log(state)
   const navigate = useNavigate()
   const handleLogOut = () => {
     navigate('/login')

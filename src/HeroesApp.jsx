@@ -1,12 +1,15 @@
 import { Outlet } from 'react-router-dom';
 
+import { UserProvider } from './auth/context/userProvider';
 import { FooterApp } from './ui/components/Footer';
 import { NavBar } from './ui/components/NavBar';
 
 export const HeroesApp = () => {
+
+
   return (
    
-
+<UserProvider>
   <main className="bg-white dark:bg-black">
     {/* navbar */}
     <NavBar  />
@@ -17,6 +20,8 @@ export const HeroesApp = () => {
     {/* Footer */}
     <FooterApp/>
   </main>
+
+</UserProvider>
     
   )
 }

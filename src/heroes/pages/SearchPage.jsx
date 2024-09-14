@@ -21,12 +21,17 @@ import { useForm } from '../hooks/useForm';
 
 export const SearchPage = () => {
     const [heroes, setHeroes] = useState([]);
-    const [isHero, setIsHero] = useState(false)
+    const [showSpan, setShowSpan] = useState(false)
+    const [showError, setShowError] = useState(false)
+
+
     //navegacion
     const navigate = useNavigate()
     //location
     const location = useLocation()
     const { q = '' } = queryString.parse(location.search)
+    // const showSpan = (q.length === 0) 
+    // const showError = (q.length > 0 && heroes.length === 0)
 
     const { searchText, onInputChange } = useForm({
         searchText: q
@@ -34,9 +39,18 @@ export const SearchPage = () => {
 
 
     useEffect(() => {
+
+        if (q.trim().length === 0) {
+            setHeroes([])
+            setShowSpan(true) //mensaje de caja vacia
+            setShowError(false)
+        }
+
         const fetchHeroes = getHeroByName(q)
         setHeroes(fetchHeroes)
-        setIsHero(heroes.length > 0)
+        setShowSpan(false)
+        setShowError(heroes.length === 0)
+        console.log(heroes.length === 0 )
     }, [q])
 
 
@@ -65,29 +79,21 @@ export const SearchPage = () => {
                 <Button type='submit'>Search</Button>
             </form>
             {/* results */}
-            {
-                isHero && (<div className="p-10 w-full flex flex-col items-center justify-center">
-                    <h2 className='text-xl font-extrabold'>
-                        Results:
-                    </h2>
-                    <div className='border border-black my-4 w-2/4 mx-auto'></div>
-                    {
-                        (q === '')
-                            ? (<Alert color="success" onDismiss={() => alert('Alert dismissed!')}>
-                                <span className="font-medium">Search!</span> You can found every hero, only put the name in the input.
-                            </Alert>)
-                            : (heroes.length === 0) && (<Alert color="failure" icon={HiInformationCircle}>
-                                <span className="font-medium">Error!</span> No Hero with {q}.
-                            </Alert>)
-                    }
-                    {
-                        heroes.map(hero => (
+            <div className="p-10 w-full flex flex-col items-center justify-center">
+                <h2 className='text-xl font-extrabold'>
+                    Results:
+                </h2>
+                <div className='border border-black my-4 w-2/4 mx-auto'></div>
+                {showSpan && (<Alert color="success" onDismiss={() => alert('Alert dismissed!')}><span className="font-medium">Search!</span> You can found every hero, only put the name in the input.</Alert>)}
+                {showError && (<Alert color="failure" icon={HiInformationCircle}> <span className="font-medium">Error!</span> No Hero with {q}.</Alert>)}
+                {
+                    heroes.map(hero => (
 
-                            <CardHero key={hero.id} {...hero} />
-                        ))
-                    }
-                </div>)
-            }
+                        <CardHero key={hero.id} {...hero} />
+                    ))
+                }
+
+            </div>
 
         </>
     )
