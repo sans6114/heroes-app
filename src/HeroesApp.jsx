@@ -5,7 +5,9 @@ import { NavBar } from './ui/components/NavBar';
 
 export const HeroesApp = () => {
   return (
-  <main>
+   
+
+  <main className="bg-white dark:bg-black">
     {/* navbar */}
     <NavBar  />
     {/* my pages */}
@@ -15,5 +17,6 @@ export const HeroesApp = () => {
     {/* Footer */}
     <FooterApp/>
   </main>
+    
   )
 }

@@ -21,7 +21,7 @@ const handleLogOut = () => {
 
 
 
-  const navLink = 'text-center py-2.5 px-5 me-2 mb-2 text-md font-bold text-gray-900 rounded-xl w-full md:max-w-md  border-2 border-blue-500 dark:text-white focus:z-10'
+  const navLink = 'text-center py-2.5 px-5 me-2 mb-2 text-md font-bold text-gray-900 rounded-xl w-full md:w-32  border-2 border-blue-500 dark:text-white focus:z-10'
   return (
     <Navbar fluid className='fixed top-0 w-full shadow-2xl z-50'>
       <Navbar.Brand>
@@ -38,6 +38,12 @@ const handleLogOut = () => {
           className={({ isActive }) => `${navLink} ${isActive ? 'bg-blue-500 text-white font-bold' : ''}`}
         >
           Presentation
+        </NavLink>
+        <NavLink
+          to="/search-hero"
+          className={({ isActive }) => `${navLink} ${isActive ? 'bg-blue-500 text-white font-bold' : ''}`}
+        >
+          Search Hero
         </NavLink>
         <Dropdown
           arrowIcon={true}

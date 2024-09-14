@@ -19,8 +19,8 @@ export const CardHero = ({
     }
 
     return (
-        <Card className="max-w-sm md:max-w-xl" imgSrc={urlHero} imgAlt={`image of hero: ${superhero}`} horizontal>
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <Card className="max-w-sm md:max-w-xl text-gray-900 dark:text-white animate-fade-up animate-duration-[1000ms]" imgSrc={urlHero} imgAlt={`image of hero: ${superhero}`} horizontal>
+            <h5 className="text-2xl font-bold tracking-tight ">
                 {superhero}
             </h5>
             <h3 className='font-medium'>Public by: <span className='font-bold'>{publisher}</span></h3>
