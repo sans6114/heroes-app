@@ -1,15 +1,15 @@
-import { Button } from 'flowbite-react';
-
 export const Btn = ({btnText, className, handleFunction}) => {
 
+
+  const defaultClass = 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
 const onClick = () => {
     handleFunction()
 }
 
   return (
-    <Button color="info" className={className} onClick={onClick}>
+    <button color="info" className={className || defaultClass } onClick={onClick}>
       {btnText}
-    </Button>
+    </button>
     
   )
 }

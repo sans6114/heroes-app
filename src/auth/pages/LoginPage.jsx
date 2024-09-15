@@ -3,17 +3,18 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Btn } from '../../ui/components/Btn';
-import { UserContext } from '../context/USerContext';
+import { AuthContext } from '../context/AuthContext';
 
 export const LoginPage = () => {
+const {login} = useContext(AuthContext)
 
-  const {state} = useContext(UserContext)
-console.log(state)
   const navigate = useNavigate()
   const handleLogOut = () => {
     navigate('/login')
   }
   const handleLogIn = () => {
+
+    login('santiago')
     navigate('/', { replace: true })
   }
 
