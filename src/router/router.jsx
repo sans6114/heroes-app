@@ -8,6 +8,8 @@ import { HomePage } from '../heroes/pages/HomePage';
 import { MarvelPage } from '../heroes/pages/MarvelPage';
 import { SearchPage } from '../heroes/pages/SearchPage';
 import { HeroesApp } from '../HeroesApp';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 export const router = createBrowserRouter([
     {
@@ -17,27 +19,47 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <HomePage/>,
+                element:
+                    <PrivateRoute>
+                        <HomePage />
+                    </PrivateRoute>
             },
             {
                 path: '/search-hero',
-                element: <SearchPage/>,
+                element:
+                    <PrivateRoute>
+                        <SearchPage />
+                    </PrivateRoute>
             },
             {
                 path: "marvel",
-                element: <MarvelPage />,
+                element:
+                    <PrivateRoute>
+
+                        <MarvelPage />
+                    </PrivateRoute>
             },
             {
                 path: "dc",
-                element: <DcPage />,
+                element:
+                    <PrivateRoute>
+
+                        <DcPage />
+                    </PrivateRoute>
             },
             {
                 path: "hero/:id",
-                element: <HeroPage />,
+                element:
+                    <PrivateRoute>
+                        <HeroPage />
+                    </PrivateRoute>
             },
             {
                 path: 'login',
-                element: <LoginPage/>
+                element:
+                    <PublicRoute>
+                        <LoginPage />
+                    </PublicRoute>
             }
         ]
     },

@@ -14,13 +14,13 @@ import { AuthContext } from '../../auth/context/AuthContext';
 import { Btn } from './Btn';
 
 export const NavBar = () => {
-  const { user } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
   const handleLogOut = () => {
-    console.log('logout')
-    navigate('/login')
+    logout()
+    navigate('/')
   }
   const navLink = 'text-center py-2.5 px-1 me-2 mb-2 text-sm font-bold text-gray-900 rounded-xl w-full md:w-32 border-2 border-blue-500 dark:text-white focus:z-10'
   return (
@@ -35,7 +35,8 @@ export const NavBar = () => {
             user ? (
               <div className='flex items-center mx-2 gap-x-2'>
                 <CiUser />
-                <h2 className='font-bold'>{user.name}</h2>
+                <h2 className='font-bold'>{user?.name}</h2>
+                <Btn btnText={'LogOut'} handleFunction={handleLogOut} />
               </div>
             ) : (
               <div className='flex mx-4 items-center'>
@@ -44,9 +45,9 @@ export const NavBar = () => {
                   to="/login"
                   className={({ isActive }) => `${navLink} ${isActive ? 'bg-blue-500 text-white font-bold' : ''}`}
                 >
+                
                   login
                 </NavLink>
-                <Btn btnText={'LogOut'} handleFunction={handleLogOut} />
               </div>
             )
           }
@@ -81,6 +82,15 @@ export const NavBar = () => {
         >
           Search Hero
         </NavLink>
+        {
+          user && (<NavLink
+            to="/login"
+            className={({ isActive }) => `${navLink} ${isActive ? 'bg-blue-500 text-white font-bold' : ''}`}
+          >
+            login page
+          </NavLink>)
+        }
+        
       </Navbar.Collapse>
     </Navbar>
   );
